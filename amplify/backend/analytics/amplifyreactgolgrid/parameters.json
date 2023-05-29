@@ -1,0 +1,21 @@
+{
+    "appName": "amplifyreactgolgrid",
+    "roleName": "pinpointLambdaRolef6ec0076",
+    "cloudformationPolicyName": "cloudformationPolicyf6ec0076",
+    "cloudWatchPolicyName": "cloudWatchPolicyf6ec0076",
+    "pinpointPolicyName": "pinpointPolicyf6ec0076",
+    "authPolicyName": "pinpoint_amplify_f6ec0076",
+    "unauthPolicyName": "pinpoint_amplify_f6ec0076",
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "authRoleArn": {
+        "Fn::GetAtt": [
+            "AuthRole",
+            "Arn"
+        ]
+    }
+}

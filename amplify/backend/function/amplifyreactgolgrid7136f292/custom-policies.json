@@ -1,0 +1,7 @@
+[
+  {
+    "Action": ["ses:SendEmail"],
+    "Effect": "Allow",
+    "Resource": ["arn:aws:ses:us-east-1:410121956540:identity/leslienarh@gmail.com"]
+  }
+]
