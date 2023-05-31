@@ -30,4 +30,76 @@ The team members below made this project successful :
 
 ## The Solution
 
+<img src="images/serverless_arch.png" alt="serverless architecture" width="auto" height="150">
+
 An AWS Amplify web app using React, with AWS Cognito for user management, GraphQL for the backend, and DynamoDB as the database.
+
+## Getting started
+
+If you don't already have an AWS account or have the Amplify CLI installed, follow this <a href="https://docs.amplify.aws/start/getting-started/installation/q/integration/next/#install-and-configure-the-amplify-cli">guide.
+</a>
+
+The Amplify services we'll need for our backend are in the following order:
+
+- Cognito: Customer identity and access management
+- AppSync: Fully managed GraphQL API
+- DynamoDB: NoSQL database
+- Lambda: FaaS/cloud function
+
+1. Once setup clone the repo. After cloning the repo install the dependencies.
+
+- `git clone git@github.com:tettehnarh/azubi_cloud_project_3.git` to clone the repo
+- `cd azubi_cloud_project_3` change directory to the cloned repo
+- `npm install` install dependencies
+
+2. Install the Amplify CLI globally on your machine.
+   `npm install -g @aws-amplify/cli`
+
+3. Initialize your backend
+   `amplify init`
+
+4. Add an API
+   `amplify add api`
+
+5. Setup our functio trigger
+   `amplify add function`
+
+```javascript:
+const aws = require("aws-sdk");
+const ses = new aws.SES();
+
+exports.handler = async (event) => {
+  for (const streamedItem of event.Records) {
+    if (
+      streamedItem.eventName === "INSERT" ||
+      streamedItem.eventName === "MODIFY"
+    ) {
+      const userEmail = streamedItem.dynamodb.NewImage.userName.S;
+
+      await ses
+        .sendEmail({
+          Destination: {
+            ToAddresses: [userEmail],
+          },
+          Source: process.env.SES_EMAIL,
+          Message: {
+            Subject: { Data: "Welcome to Gold Grid" },
+            Body: {
+              Text: {
+                Data: "Thank you for filling out the form. Welcome to the Gold Grid family.",
+              },
+            },
+          },
+        })
+        .promise();
+    }
+  }
+  return { status: "done" };
+};
+```
+
+4. Setup SES
+
+5. Updating our Lambda
+
+6. Push up our backend
