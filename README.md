@@ -30,7 +30,7 @@ The team members below made this project successful :
 
 ## The Solution
 
-<img src="images/serverless_arch.png" alt="serverless architecture" width="auto" height="150">
+<img src="serverless_arch.png" alt="serverless architecture" width="auto" height="150">
 
 An AWS Amplify web app using React, with AWS Cognito for user management, GraphQL for the backend, and DynamoDB as the database.
 
